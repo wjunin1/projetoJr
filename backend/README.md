@@ -90,6 +90,12 @@ O modelo principal do sistema é o `Game`, que possui os seguintes campos:
 - **finished** (BOOLEAN) - Se o jogo foi zerado/concluído
 - **playing** (BOOLEAN) - Se está jogando atualmente
 
+## 🔗 Links Úteis
+
+- [Repositório no GitHub](https://github.com/seu-usuario/sistema-controle-jogos)
+- [README Principal](../README.md)
+- [Guia de Upload para GitHub](../GITHUB_SETUP.md)
+
 ## 🧪 Desenvolvimento
 
 O banco de dados SQLite é inicializado automaticamente na primeira execução. Para resetar o banco:

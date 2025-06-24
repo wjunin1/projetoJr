@@ -87,6 +87,17 @@ npm start
 
 A aplicação estará disponível em [http://localhost:3000](http://localhost:3000).
 
+## 📥 Clone do Repositório
+
+Para clonar este repositório, execute o seguinte comando:
+
+```bash
+git clone https://github.com/seu-usuario/sistema-controle-jogos.git
+cd sistema-controle-jogos
+```
+
+> **Nota:** Substitua `seu-usuario` pelo seu nome de usuário do GitHub.
+
 ## 📊 Usando o Sistema
 
 ### Adicionando Jogos

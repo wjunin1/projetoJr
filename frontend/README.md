@@ -95,6 +95,12 @@ O frontend se comunica com o backend através de uma API REST. A configuração 
 
 Por padrão, a aplicação espera que o backend esteja disponível em `http://localhost:5000`.
 
+## 🔗 Links Úteis
+
+- [Repositório no GitHub](https://github.com/seu-usuario/sistema-controle-jogos)
+- [README Principal](../README.md)
+- [Guia de Upload para GitHub](../GITHUB_SETUP.md)
+
 ---
 
 Para informações mais detalhadas sobre o projeto completo, consulte o [README principal](../README.md) na raiz do projeto.
