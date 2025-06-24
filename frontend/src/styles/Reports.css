@@ -1,0 +1,259 @@
+/* Estilos para a página de relatórios */
+.reports-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.reports-title {
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.reports-title:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background-color: #4CAF50;
+}
+
+.report-section {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.report-section:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.section-title {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+/* Cards de estatísticas gerais */
+.stats-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #4CAF50, #2E7D32);
+  color: white;
+  border-radius: 8px;
+  padding: 20px 15px;
+  text-align: center;
+  min-width: 150px;
+  flex: 1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Cores específicas para cada tipo de cartão */
+.total-card {
+  background: linear-gradient(135deg, #3949AB, #1A237E);
+}
+
+.hours-card {
+  background: linear-gradient(135deg, #00897B, #004D40);
+}
+
+.finished-card {
+  background: linear-gradient(135deg, #43A047, #1B5E20);
+}
+
+.playing-card {
+  background: linear-gradient(135deg, #E53935, #B71C1C);
+}
+
+.completion-card {
+  background: linear-gradient(135deg, #FB8C00, #E65100);
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Tabelas de relatórios */
+.table-responsive {
+  overflow-x: auto;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.report-table th {
+  background-color: #f5f5f5;
+  color: #333;
+  font-weight: 600;
+  text-align: left;
+  padding: 12px 15px;
+  border-bottom: 2px solid #ddd;
+}
+
+.report-table th.sortable {
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+}
+
+.report-table th.sortable:hover {
+  background-color: #e9ecef;
+}
+
+.report-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.report-table tr:last-child td {
+  border-bottom: none;
+}
+
+.report-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* Cores alternadas para as linhas */
+.report-table tbody tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
+/* Barras de progresso para percentuais */
+.progress-container {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  height: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #4CAF50;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #333;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
+}
+
+/* Cores específicas para tipos de barras */
+.rating-bar {
+  background-color: #FF9800;
+}
+
+.genre-bar {
+  background-color: #2196F3;
+}
+
+/* Indicadores de ordenação */
+.sort-indicators {
+  display: inline-flex;
+  margin-left: 5px;
+  font-size: 0.8rem;
+  vertical-align: middle;
+  gap: 2px;
+}
+
+.sort-indicators span {
+  display: inline-block;
+  line-height: 1;
+  padding: 2px 3px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 3px;
+}
+
+.sort-indicators span:hover {
+  transform: scale(1.2);
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+.active-indicator {
+  color: #4CAF50;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.inactive-indicator {
+  color: #bbb;
+  opacity: 0.7;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .stats-cards {
+    flex-direction: column;
+  }
+  
+  .stat-card {
+    width: 100%;
+  }
+  
+  .report-table {
+    font-size: 0.9rem;
+  }
+  
+  .report-table th, 
+  .report-table td {
+    padding: 10px;
+  }
+  
+  .progress-container {
+    height: 16px;
+  }
+  
+  .progress-text {
+    font-size: 0.75rem;
+  }
+}
