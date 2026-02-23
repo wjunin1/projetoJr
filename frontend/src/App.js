@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import * as api from './services/api';
 import GameList from './components/GameList';
 import GameForm from './components/GameForm';
+import LoginForm from './components/LoginForm';
+import GameDetailsModal from './components/GameDetailsModal';
 import Menu from './components/Menu';
 import Home from './pages/Home';
 import Reports from './pages/Reports';
@@ -16,21 +18,54 @@ Modal.setAppElement('#root');
 
 function App() {
   const [games, setGames] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(Boolean(localStorage.getItem('authToken')));
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [detailsModalIsOpen, setDetailsModalIsOpen] = useState(false);
   const [confirmationModalIsOpen, setConfirmationModalIsOpen] = useState(false);
   const [gameToDelete, setGameToDelete] = useState(null);
   const [currentGame, setCurrentGame] = useState(null);
+  const [selectedGameDetails, setSelectedGameDetails] = useState(null);
   const fileInputRef = useRef(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortConfig, setSortConfig] = useState({ key: 'hours', direction: 'descending' });
 
   useEffect(() => {
-    fetchGames();
-  }, []);
+    if (isAuthenticated) {
+      fetchGames();
+    }
+  }, [isAuthenticated]);
+
+  const handleLogin = async (username, password) => {
+    try {
+      const response = await api.login(username, password);
+      localStorage.setItem('authToken', response.data.token);
+      setIsAuthenticated(true);
+      toast.success('Login realizado com sucesso!');
+    } catch (error) {
+      toast.error('Usuário ou senha inválidos.');
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    setGames([]);
+    setIsAuthenticated(false);
+    toast.info('Você saiu da sessão.');
+  };
 
   const fetchGames = async () => {
-    const response = await api.getGames();
-    setGames(response.data);
+    try {
+      const response = await api.getGames();
+      setGames(response.data);
+    } catch (error) {
+      if (error.response?.status === 401) {
+        localStorage.removeItem('authToken');
+        setIsAuthenticated(false);
+        toast.error('Sessão expirada. Faça login novamente.');
+      } else {
+        toast.error('Erro ao carregar jogos.');
+      }
+    }
   };
 
   const handleSave = async (game) => {
@@ -53,6 +88,11 @@ function App() {
   const handleEdit = (game) => {
     setCurrentGame(game);
     setModalIsOpen(true);
+  };
+
+  const handleDetails = (game) => {
+    setSelectedGameDetails(game);
+    setDetailsModalIsOpen(true);
   };
 
   const handleDelete = (id) => {
@@ -147,9 +187,16 @@ function App() {
     <Router>
       <div className="App">
         <ToastContainer />
+        {!isAuthenticated ? (
+          <LoginForm onLogin={handleLogin} />
+        ) : (
+          <>
         <header className="App-header">
           <h1>Controle de Jogos</h1>
-          <Menu />
+          <div className="header-actions">
+            <Menu />
+            <button className="logout-button" onClick={handleLogout}>Sair</button>
+          </div>
         </header>
         <main>
           <Routes>
@@ -180,6 +227,7 @@ function App() {
                 <GameList 
                   games={sortedAndFilteredGames} 
                   onEdit={handleEdit} 
+                  onDetails={handleDetails}
                   onDelete={handleDelete} 
                   requestSort={requestSort}
                   sortConfig={sortConfig}
@@ -198,12 +246,26 @@ function App() {
         >
           <GameForm currentGame={currentGame} onSave={handleSave} onCancel={closeModal} />
         </Modal>
+        <Modal
+          isOpen={detailsModalIsOpen}
+          onRequestClose={() => setDetailsModalIsOpen(false)}
+          contentLabel="Detalhes do Jogo"
+          className="modal"
+          overlayClassName="overlay"
+        >
+          <GameDetailsModal
+            game={selectedGameDetails}
+            onClose={() => setDetailsModalIsOpen(false)}
+          />
+        </Modal>
         <ConfirmationModal
           isOpen={confirmationModalIsOpen}
           onRequestClose={() => setConfirmationModalIsOpen(false)}
           onConfirm={confirmDelete}
           message="Você tem certeza que deseja deletar este jogo? Esta ação não pode ser desfeita."
         />
+        </>
+        )}
       </div>
     </Router>
   );

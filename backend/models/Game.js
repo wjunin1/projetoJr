@@ -25,8 +25,9 @@ const Game = sequelize.define('Game', {
   finished: {
     type: DataTypes.BOOLEAN
   },
-  playing: {
-    type: DataTypes.BOOLEAN
+  playedYear: {
+    type: DataTypes.INTEGER,
+    allowNull: true
   }
 });
 

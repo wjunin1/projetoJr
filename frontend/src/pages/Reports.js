@@ -6,7 +6,7 @@ const Reports = () => {
   const [games, setGames] = useState([]);
   const [sortConfigs, setSortConfigs] = useState({
     platform: { key: 'platform', direction: 'ascending' },
-    rating: { key: 'rating', direction: 'ascending' },
+    rating: { key: 'rating', direction: 'descending' },
     genre: { key: 'genre', direction: 'ascending' },
     year: { key: 'year', direction: 'ascending' }
   });
@@ -20,7 +20,6 @@ const Reports = () => {
   const totalGames = games.length;
   const totalHours = games.reduce((acc, game) => acc + (game.hours || 0), 0);
   const finishedGames = games.filter(game => game.finished).length;
-  const playingGames = games.filter(game => game.playing).length;
 
   const platformStats = games.reduce((acc, game) => {
     if (!acc[game.platform]) {
@@ -184,19 +183,15 @@ const Reports = () => {
             <div className="stat-value">{finishedGames}</div>
             <div className="stat-label">Jogos Zerados</div>
           </div>
-          <div className="stat-card playing-card">
-            <div className="stat-value">{playingGames}</div>
-            <div className="stat-label">Jogando Atualmente</div>
-          </div>
           <div className="stat-card completion-card">
-            <div className="stat-value">{((finishedGames / totalGames) * 100).toFixed(1)}%</div>
+            <div className="stat-value">{totalGames ? ((finishedGames / totalGames) * 100).toFixed(1) : '0.0'}%</div>
             <div className="stat-label">Conclusão</div>
           </div>
         </div>
       </div>
 
       <div className="report-section">
-        <h3 className="section-title">Jogos por Ano</h3>
+        <h3 className="section-title">Jogos por Ano de Lançamento</h3>
         <div className="table-responsive">
           <table className="report-table">
             <thead>
@@ -303,7 +298,7 @@ const Reports = () => {
                 <th className="sortable" onClick={() => requestSort('rating', 'total')}>
                   Total de Jogos{getSortIndicator('rating', 'total')}
                 </th>
-                <th>Distribuição</th>
+                <th>Percentual %</th>
               </tr>
             </thead>
             <tbody>

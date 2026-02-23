@@ -9,7 +9,12 @@ Um sistema web completo para gerenciamento e análise de coleções de jogos, pe
 - **Gerenciamento Completo (CRUD)** de jogos com informações detalhadas:
   - Nome, ano, gênero, plataforma, nota
   - Horas jogadas, status de conclusão
-  - Status de jogo em andamento
+  - Ano jogado (opcional)
+
+- **Autenticação de acesso**
+  - Login obrigatório para acessar o sistema
+  - Usuário padrão: `admin`
+  - Senha padrão: `admin123`
 
 - **Importação em Massa** via planilha Excel
   - Template disponível para download
@@ -103,8 +108,15 @@ cd sistema-controle-jogos
 ### Adicionando Jogos
 1. Acesse a página inicial
 2. Clique no botão "Adicionar Jogo"
-3. Preencha todos os campos do formulário
+3. Preencha os campos obrigatórios do formulário
+4. (Opcional) Informe o ano em que jogou
 4. Clique em "Salvar"
+
+### Login
+1. Ao abrir a aplicação, a tela de login será exibida
+2. Use o usuário padrão `admin`
+3. Use a senha padrão `admin123`
+4. Após autenticar, as páginas do sistema são liberadas
 
 ### Importando Jogos via Excel
 1. Acesse a página inicial

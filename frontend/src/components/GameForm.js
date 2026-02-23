@@ -9,13 +9,13 @@ const GameForm = ({ currentGame, onSave, onCancel }) => {
     rating: '',
     hours: '',
     finished: false,
-    playing: false
+    playedYear: ''
   });
 
-  const genres = ['MMORPG', 'Simulação', 'FPS', 'ARPG', 'Aventura', 'Corrida', 'Ação', 'Luta', 'Esportes', 'Terror', 'RPG', 'Estrategia', 'Card Game', 'Puzzle'];
+  const genres = ['MMORPG', 'RTS', 'Simulação', 'FPS', 'ARPG', 'Aventura', 'Corrida', 'Ação', 'Luta', 'Esportes', 'Terror', 'RPG', 'Estrategia', 'Card Game', 'Puzzle'];
   const platforms = ['PC', 'PS1', 'Xbox One', 'SNES', 'PS3', 'Atari', 'NES', 'Arcade', 'GB', 'N64', 'PS2', 'MegaDrive', 'GBA', 'GBC', 'Sega CD', 'PC Engine', 'Switch', 'Game Cube', 'Saturn', 'Game Gear', 'Deamcast', '32x', 'Neo Geo'];
   const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: currentYear - 1998 }, (_, i) => currentYear - i);
+  const years = Array.from({ length: currentYear - 1980 }, (_, i) => currentYear - i);
 
   useEffect(() => {
     if (currentGame) {
@@ -29,7 +29,7 @@ const GameForm = ({ currentGame, onSave, onCancel }) => {
         rating: '',
         hours: '',
         finished: false,
-        playing: false
+        playedYear: ''
       });
     }
   }, [currentGame]);
@@ -64,13 +64,10 @@ const GameForm = ({ currentGame, onSave, onCancel }) => {
       </select>
       <input type="number" name="rating" placeholder="Nota" value={game.rating} onChange={handleChange} />
       <input type="number" name="hours" placeholder="Horas" value={game.hours} onChange={handleChange} />
+      <input type="number" name="playedYear" placeholder="Ano jogado (opcional)" value={game.playedYear || ''} onChange={handleChange} />
       <label>
         Zerado:
         <input type="checkbox" name="finished" checked={game.finished} onChange={handleChange} />
-      </label>
-      <label>
-        Jogando:
-        <input type="checkbox" name="playing" checked={game.playing} onChange={handleChange} />
       </label>
       <div className="form-buttons">
         <button type="submit">Salvar</button>

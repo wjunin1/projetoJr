@@ -22,6 +22,25 @@
   align-items: center;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logout-button {
+  background-color: #dc3545;
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #b02a37;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -109,6 +128,16 @@ button.edit {
   margin-right: 5px;
 }
 
+button.details {
+  background-color: #0d6efd;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 3px;
+  margin-right: 5px;
+}
+
 button.delete {
   background-color: #f44336;
   border: none;
@@ -131,6 +160,18 @@ button.delete {
   border-radius: 10px;
   max-width: 500px;
   width: 100%;
+}
+
+.details-modal-content h2 {
+  margin-top: 0;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 14px 0 18px;
+  text-align: left;
 }
 
 .overlay {
@@ -219,6 +260,36 @@ nav ul li a {
 
 main {
   padding: 20px;
+}
+
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 420px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login-form h2 {
+  margin: 0;
+}
+
+.login-hint {
+  margin: 0;
+  color: #6c757d;
+  font-size: 14px;
 }
 
 .Toastify__toast-container {

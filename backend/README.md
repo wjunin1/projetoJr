@@ -64,8 +64,13 @@ nodemon server.js
 
 ## 📚 API Endpoints
 
+### Autenticação
+
+- **POST /api/auth/login** - Realiza login e retorna token de acesso
+
 ### Jogos
 
+- **Todas as rotas de jogos exigem token Bearer no header Authorization**
 - **GET /api/games** - Lista todos os jogos
 - **GET /api/games/:id** - Obtém um jogo específico
 - **POST /api/games** - Cria um novo jogo
@@ -88,7 +93,7 @@ O modelo principal do sistema é o `Game`, que possui os seguintes campos:
 - **rating** (INTEGER) - Nota do jogo (1-10)
 - **hours** (INTEGER) - Horas jogadas
 - **finished** (BOOLEAN) - Se o jogo foi zerado/concluído
-- **playing** (BOOLEAN) - Se está jogando atualmente
+- **playedYear** (INTEGER, opcional) - Ano em que o jogo foi jogado
 
 ## 🔗 Links Úteis
 

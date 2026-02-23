@@ -7,7 +7,13 @@ Interface de usuário moderna e interativa para o Sistema de Controle de Jogos, 
 - **Gerenciamento de Jogos**
   - Listagem com ordenação por todas as colunas
   - Formulários para adicionar, editar e excluir jogos
+  - Botão de detalhes para visualizar informações completas do jogo
+  - Campo opcional de ano jogado (`playedYear`)
   - Filtros de busca por nome
+
+- **Autenticação**
+  - Tela de login obrigatória antes do uso do sistema
+  - Credenciais padrão: `admin` / `admin123`
 
 - **Relatórios Estatísticos**
   - Visão geral com cards interativos

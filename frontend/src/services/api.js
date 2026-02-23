@@ -7,8 +7,24 @@ const apiClient = axios.create({
   }
 });
 
+apiClient.interceptors.request.use((config) => {
+  const token = localStorage.getItem('authToken');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+export const login = (username, password) => {
+  return apiClient.post('/auth/login', { username, password });
+};
+
 export const getGames = () => {
   return apiClient.get('/games');
+};
+
+export const getGameById = (id) => {
+  return apiClient.get(`/games/${id}`);
 };
 
 export const createGame = (game) => {
