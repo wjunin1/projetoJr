@@ -1,6 +1,6 @@
 import React from 'react';
 
-const GameList = ({ games, onEdit, onDetails, onDelete, requestSort, sortConfig }) => {
+const GameList = ({ games, onEdit, onDetails, onDelete, onAddHours, requestSort, sortConfig }) => {
   const getSortIndicator = (key) => {
     if (sortConfig.key === key) {
       return sortConfig.direction === 'ascending' ? ' ▲' : ' ▼';
@@ -36,6 +36,7 @@ const GameList = ({ games, onEdit, onDetails, onDelete, requestSort, sortConfig 
               <td>{game.finished ? 'Sim' : 'Não'}</td>
               <td>{game.playedYear || '-'}</td>
               <td>
+                <button className="add-hours" onClick={() => onAddHours(game)}>+ Hora</button>
                 <button className="details" onClick={() => onDetails(game)}>Detalhes</button>
                 <button className="edit" onClick={() => onEdit(game)}>Editar</button>
                 <button className="delete" onClick={() => onDelete(game.id)}>Deletar</button>

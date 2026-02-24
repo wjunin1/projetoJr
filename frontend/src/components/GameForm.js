@@ -12,7 +12,7 @@ const GameForm = ({ currentGame, onSave, onCancel }) => {
     playedYear: ''
   });
 
-  const genres = ['MMORPG', 'RTS', 'Simulação', 'FPS', 'ARPG', 'Aventura', 'Corrida', 'Ação', 'Luta', 'Esportes', 'Terror', 'RPG', 'Estrategia', 'Card Game', 'Puzzle'];
+  const genres = ['MMORPG', 'RTS', 'Sandbox', 'Souls Like', 'Simulação', 'FPS', 'ARPG', 'Aventura', 'Corrida', 'Ação', 'Luta', 'Esportes', 'Terror', 'RPG', 'Estrategia', 'Card Game', 'Puzzle', 'indie'];
   const platforms = ['PC', 'PS1', 'Xbox One', 'SNES', 'PS3', 'Atari', 'NES', 'Arcade', 'GB', 'N64', 'PS2', 'MegaDrive', 'GBA', 'GBC', 'Sega CD', 'PC Engine', 'Switch', 'Game Cube', 'Saturn', 'Game Gear', 'Deamcast', '32x', 'Neo Geo'];
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: currentYear - 1980 }, (_, i) => currentYear - i);

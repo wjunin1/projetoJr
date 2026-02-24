@@ -20,11 +20,14 @@ function App() {
   const [games, setGames] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(Boolean(localStorage.getItem('authToken')));
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [addHoursModalIsOpen, setAddHoursModalIsOpen] = useState(false);
   const [detailsModalIsOpen, setDetailsModalIsOpen] = useState(false);
   const [confirmationModalIsOpen, setConfirmationModalIsOpen] = useState(false);
   const [gameToDelete, setGameToDelete] = useState(null);
   const [currentGame, setCurrentGame] = useState(null);
   const [selectedGameDetails, setSelectedGameDetails] = useState(null);
+  const [selectedGameToAddHours, setSelectedGameToAddHours] = useState(null);
+  const [newHoursInput, setNewHoursInput] = useState('');
   const fileInputRef = useRef(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortConfig, setSortConfig] = useState({ key: 'hours', direction: 'descending' });
@@ -93,6 +96,42 @@ function App() {
   const handleDetails = (game) => {
     setSelectedGameDetails(game);
     setDetailsModalIsOpen(true);
+  };
+
+  const handleOpenAddHours = (game) => {
+    setSelectedGameToAddHours(game);
+    setNewHoursInput(String(Number(game.hours) || 0));
+    setAddHoursModalIsOpen(true);
+  };
+
+  const handleSaveAddHours = async () => {
+    const updatedHoursValue = Number(newHoursInput);
+
+    if (!Number.isFinite(updatedHoursValue) || updatedHoursValue < 0) {
+      toast.error('Informe um valor de horas válido (zero ou maior).');
+      return;
+    }
+
+    if (!selectedGameToAddHours) {
+      toast.error('Nenhum jogo selecionado para atualizar horas.');
+      return;
+    }
+
+    try {
+      const updatedGame = {
+        ...selectedGameToAddHours,
+        hours: updatedHoursValue,
+      };
+
+      await api.updateGame(selectedGameToAddHours.id, updatedGame);
+      toast.success('Horas atualizadas com sucesso!');
+      setAddHoursModalIsOpen(false);
+      setSelectedGameToAddHours(null);
+      setNewHoursInput('');
+      fetchGames();
+    } catch (error) {
+      toast.error('Erro ao atualizar horas do jogo.');
+    }
   };
 
   const handleDelete = (id) => {
@@ -227,6 +266,7 @@ function App() {
                 <GameList 
                   games={sortedAndFilteredGames} 
                   onEdit={handleEdit} 
+                  onAddHours={handleOpenAddHours}
                   onDetails={handleDetails}
                   onDelete={handleDelete} 
                   requestSort={requestSort}
@@ -245,6 +285,35 @@ function App() {
           overlayClassName="overlay"
         >
           <GameForm currentGame={currentGame} onSave={handleSave} onCancel={closeModal} />
+        </Modal>
+        <Modal
+          isOpen={addHoursModalIsOpen}
+          onRequestClose={() => setAddHoursModalIsOpen(false)}
+          contentLabel="Atualizar horas jogadas"
+          className="modal"
+          overlayClassName="overlay"
+        >
+          <div className="add-hours-modal-content">
+            <h2>Atualizar horas jogadas</h2>
+            <p>
+              {selectedGameToAddHours
+                ? `Jogo: ${selectedGameToAddHours.name}`
+                : 'Selecione um jogo'}
+            </p>
+            <input
+              type="number"
+              min="0"
+              step="1"
+              placeholder="Ex: 120"
+              value={newHoursInput}
+              onChange={(event) => setNewHoursInput(event.target.value)}
+            />
+            <small className="add-hours-help">Digite o total final de horas que deseja salvar.</small>
+            <div className="form-buttons">
+              <button type="button" onClick={handleSaveAddHours}>Salvar</button>
+              <button type="button" onClick={() => setAddHoursModalIsOpen(false)}>Cancelar</button>
+            </div>
+          </div>
         </Modal>
         <Modal
           isOpen={detailsModalIsOpen}
